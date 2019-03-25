@@ -1,24 +1,37 @@
 import 'dotenv/config';
-import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import {RegisterDTO} from '../src/auth/auth.dto';
+import {HttpStatus} from '@nestjs/common';
 
-describe('AppController (e2e)', () => {
-  let app;
+const app = 'http://localhost:3000';
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+describe('Root', () => {
+    it('should ping', () => {
+        return request(app)
+            .get('/')
+            .expect(200)
+            .expect('Hello World!');
+    });
+});
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+describe('Auth', () => {
+    it('should register', () => {
+        const user: RegisterDTO = {
+            userName: 'username123123',
+            password: 'password321123123',
+            address: {
+                city: 'kiev',
+                street: 'amosova',
+            },
+        };
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
+        return request(app)
+            .post('/auth/register')
+            .set('Accept', 'application/json')
+            .send(user)
+            .expect(({body}) => {
+                console.log(body);
+            })
+            .expect(HttpStatus.CREATED);
+    });
 });

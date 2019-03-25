@@ -1,15 +1,15 @@
-import { Document } from 'mongoose';
+import {Document} from 'mongoose';
 
 interface Address {
-  city: string,
-  street: string,
-  apartment: string,
+    city: string;
+    street: string;
+    apartment?: string;
 }
 
 export interface User extends Document {
-  name: string;
-  readonly password: string;
-  seller: boolean;
-  address: Address;
-  created: Date;
+    userName: string;
+    readonly password: string;
+    seller: boolean;
+    address: Address;
+    created: Date;
 }
