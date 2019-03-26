@@ -29,6 +29,8 @@
     "@types/passport-jwt": "^3.0.1",
     "axios": "^0.18.0",
     "bcrypt": "^3.0.4",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1",
     "dotenv": "^6.2.0",
     "mongoose": "^5.4.16",
     "passport": "^0.4.0",
