@@ -1,17 +1,18 @@
-import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe} from '@nestjs/common';
 import {UserService} from '../shared/user.service';
 import {LoginDto, RegisterDTO} from './auth.dto';
 import {AuthGuard} from '@nestjs/passport';
 import {AuthService} from './auth.service';
 import {Payload} from '../types/payload';
 import {User} from '../utilities/user.decorator';
+import {SellerGuard} from '../guards/seller.guard';
 
 @Controller('auth')
 export class AuthController {
     constructor(private userService: UserService, private authService: AuthService) {}
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'), SellerGuard)
     async findAll(@User() user: any) {
         console.log(user);
         return await this.userService.findAll();
@@ -30,6 +31,11 @@ export class AuthController {
     }
 
     @Post('register')
+    @UsePipes(new ValidationPipe({
+        transform: true,
+        whitelist: true,
+        forbidNonWhitelisted: true,
+    }))
     async register(@Body() userDTO: RegisterDTO) {
         const user = await this.userService.create(userDTO);
         const payload: Payload = {

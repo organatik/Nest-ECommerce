@@ -1,4 +1,4 @@
-import {IsNotEmpty, MinLength} from 'class-validator';
+import {Allow, IsNotEmpty, MinLength} from 'class-validator';
 
 export interface LoginDto {
     userName: string;
@@ -6,16 +6,16 @@ export interface LoginDto {
 }
 
 export class RegisterDTO {
-    @IsNotEmpty()
     @MinLength(5)
     userName: string;
 
-    @MinLength(10)
+    @MinLength(8)
     password: string;
 
     @IsNotEmpty()
     seller: boolean;
 
+    @Allow()
     address: {
         city: string;
         street: string;

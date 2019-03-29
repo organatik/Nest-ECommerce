@@ -7,8 +7,8 @@ import * as mongoose from 'mongoose';
 const app = 'http://localhost:3000';
 
 beforeAll(async () => {
-   await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true });
-   await mongoose.connection.db.dropDatabase();
+    await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
+    await mongoose.connection.db.dropDatabase();
 });
 
 afterAll(async (done) => {
@@ -33,6 +33,7 @@ describe('Auth', () => {
                 city: 'kiev',
                 street: 'amosova',
             },
+            seller: true,
         };
 
         return request(app)
@@ -56,6 +57,7 @@ describe('Auth', () => {
                 city: 'kiev',
                 street: 'amosova',
             },
+            seller: false,
         };
 
         return request(app)
