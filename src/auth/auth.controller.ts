@@ -14,7 +14,6 @@ export class AuthController {
     @Get()
     @UseGuards(AuthGuard('jwt'), SellerGuard)
     async findAll(@User() user: any) {
-        console.log(user);
         return await this.userService.findAll();
     }
 
