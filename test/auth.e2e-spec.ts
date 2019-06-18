@@ -3,10 +3,11 @@ import {app} from './constants';
 import * as mongoose from 'mongoose';
 import * as request from 'supertest';
 import {HttpStatus} from '@nestjs/common';
-import {LoginDto, RegisterDTO} from '../src/auth/auth.dto';
+import {RegisterDTO} from '../src/auth/auth.dto';
+import {LoginDto} from '../src/auth/login.dto';
 
 beforeAll(async () => {
-    await mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
+    await mongoose.connect(process.env.MONGO_URI, {useCreateIndex: true, useNewUrlParser: true});
     await mongoose.connection.db.dropDatabase();
 });
 

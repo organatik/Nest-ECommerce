@@ -1,10 +1,10 @@
 import * as mongoose from 'mongoose';
 
 
-export const ProductSchem = new mongoose.Schema({
+export const ProductSchema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
     },
     title: String,
     description: String,
@@ -13,11 +13,11 @@ export const ProductSchem = new mongoose.Schema({
     brand: String,
     strength: String,
     nicotine: Number,
-    pounches: Number,
+    pouches: Number,
     types: String,
     size: String,
     created: {
         type: Date,
-        default: Date.now
-    }
-})
+        default: Date.now,
+    },
+});

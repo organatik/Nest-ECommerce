@@ -20,4 +20,4 @@ const axios = require('axios');
     } catch (e) {
         console.log(e)
     }
-})();`1`
+})();

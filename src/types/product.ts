@@ -11,7 +11,7 @@ export interface Product extends Document {
   brand: string;
   strength: string;
   nicotine: number;
-  pounches: number;
+  pouches: number;
   size: string;
   types: string;
   created: Date;
